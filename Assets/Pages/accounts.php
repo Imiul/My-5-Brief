@@ -5,6 +5,23 @@ include("../Database/db_connection.php");
 $accounts = PrintAccounts();
 $clientsName = fetchClientData();
 
+if(isset($_POST['submit'])){
+    $rib = time();
+    // $client_name = $_POST['Client'];
+    $devise = $_POST['Devise'];
+    $balance = $_POST['Balance'];
+
+    $stmt = $conx->prepare("INSERT INTO `accounts` (rib, balance, currency, client_id) VALUES (?, ?, ?, ?)");
+
+    $stmt->bind_param('sssss', $rib, $client_name, $devise, $balance);
+
+    $stmt->execute();
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+
 ?>
 
 
@@ -51,6 +68,7 @@ $clientsName = fetchClientData();
             <!-- CLIENT TABLE HEAD --> 
             <div class="account-list-head table">
                 <h4>Id</h4>
+                <h4>Rib</h4>
                 <h4>Balance</h4>
                 <h4>devise</h4>
                 <h4>Client Id</h4>
@@ -65,6 +83,7 @@ $clientsName = fetchClientData();
                     foreach ($accounts as $account) {
                         echo '<div class="client table">';
                         echo '<h4>' . $account['id'] . '</h4>';
+                        echo '<h4>' . $account['rib'] . '</h4>';
                         echo '<h4>' . $account['balance'] . '</h4>';
                         echo '<h4>' . $account['currency'] . '</h4>';
                         echo '<h4>' . $account['client_id'] . '</h4>';
@@ -100,10 +119,11 @@ $clientsName = fetchClientData();
             <button class="remove" id="close" ><i class="fa-solid fa-xmark"></i></button>
         </div>
 
-        <form action="">
+        <form action="" method="post">
             
             <div>
                 <select name="Client">
+                <option value="0" selected>Choose Your Client</option>
                     <?php
                     if (!empty($clientsName)) {
                         foreach ($clientsName as $client) {
@@ -117,6 +137,7 @@ $clientsName = fetchClientData();
 
             <div>
                 <select name="Devise">
+                    <option value="0" selected>Choose Your Devise</option>
                     <option value="Mad">Mad</option>
                     <option value="Usd">Usd</option>
                     <option value="Earo">Euro</option>
@@ -136,6 +157,66 @@ $clientsName = fetchClientData();
 
     <!-- SCRIPT --> 
     <script src="../Js/New-pop-up.js"></script>
+    <script>
+        const Client = document.querySelector('select[name="Client"]');
+        const Devise = document.querySelector('select[name="Devise"]');
+        const Balance = document.querySelector('input[name="Balance"]');
+
+        const add_form = document.querySelector('form');
+        const error = document.querySelectorAll('.errorMessage');
+        let form_valid = false;
+        
+        const balanceRegex = /^\d+(\.\d{1,2})?$/;
+
+        function validate_Client() {
+            if (Client.value == "0") {
+                error[0].innerText = "Client Non Valid";
+                form_valid = false;
+            }
+            else {error[0].innerText = ""; form_valid = true;}
+        }
+
+        function validate_Devise() {
+            if (Devise.value == "0") {
+                error[1].innerText = "Devise Non Valid";
+                form_valid = false;
+            }
+            else {error[1].innerText = ""; form_valid = true;}
+        }
+
+        function validate_Balance() {
+            if (!balanceRegex.test(Balance.value)) {
+                error[2].innerText = "Balance Non Valid";
+                form_valid = false;
+            }
+            else {error[2].innerText = ""; form_valid = true;}
+        }
+
+
+        function runValidation() {
+            validate_Client();
+            validate_Devise();
+            validate_Balance();
+        }
+
+
+
+        add_form.addEventListener('submit', (e) => {
+            runValidation();
+
+            if (form_valid == false) {
+                e.preventDefault();
+
+            } else {
+                add_form.submit();
+
+                Client.value = "Choose Your Client";
+                Devise.value = "Choose Your Devise";
+                Balance.value = "";
+            }
+        });
+
+    </script>
 
 </body>
 </html>

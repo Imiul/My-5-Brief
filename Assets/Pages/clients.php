@@ -23,11 +23,10 @@ if(isset($_POST['submit'])){
 
     $stmt->bind_param('sssss', $first_name, $last_name, $birthday, $nationality, $gender);
 
-    if($stmt->execute()){
-        echo "<script>alert('data inserted sucessfully');</script>";
-    } else {
-        echo "<script>alert('failed to excute statement : ". $stmt->error ."');</script>";
-    }
+    $stmt->execute();
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
 }
 
 ?>
@@ -42,7 +41,6 @@ if(isset($_POST['submit'])){
     <script src="https://kit.fontawesome.com/0dabffdb94.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="../Css/design-system.css">
-    <link rel="stylesheet" href="../Css/Index.css">
     <link rel="stylesheet" href="../Css/Index.css">
     <style>
         .table h4:nth-child(5), .table div {width: 20%;}
@@ -170,7 +168,7 @@ if(isset($_POST['submit'])){
         const Nationality = document.querySelector('input[name="Nationality"]');
         const Gender = document.querySelector('select[name="Gender"]');
 
-        const form = document.querySelector('form');
+        const add_form = document.querySelector('form');
         const error = document.querySelectorAll('.errorMessage');
         let form_valid = false;
 
@@ -230,12 +228,19 @@ if(isset($_POST['submit'])){
 
 
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        add_form.addEventListener('submit', (e) => {
             runValidation();
 
-            if (form_valid == true) {
-                form.submit();
+            if (form_valid == false) {
+                e.preventDefault();
+            } else {
+                add_form.submit();
+
+                FirstName.value = "";
+                LastName.value = "";
+                BirthDate.value = "";
+                Nationality.value = "";
+                Gender.value = "0";
             }
         });
 

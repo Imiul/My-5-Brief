@@ -79,15 +79,15 @@
 
     $insertAccountsData = "
         INSERT INTO accounts (balance, currency, client_id, rib) 
-        VALUES  (608, 'Mad', 3, " . time() . ");
+        VALUES  (211, 'Mad', 4, " . time() . ");
     ";
 
     $insertTransactionsData = "
         INSERT INTO transactions (account_id, type, amount) 
-        VALUES  (1, 'credit', 7800),
-                (2, 'debit', 1450),
-                (2, 'credit', 90),
-                (3, 'credit', 450);
+        VALUES  (1, 'credit', 740),
+                (3, 'debit', 1450),
+                (3, 'credit', 90),
+                (4, 'credit', 450);
                 
     ";
 
