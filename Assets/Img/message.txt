@@ -1,0 +1,141 @@
+*************************************************************************************
+
+Un diagramme de classe :
+
+
+
+
++------------------------+         +------------------------+        +------------------------+
+|        Client          |         |        Compte          |        |      Transaction      |
++------------------------+         +------------------------+        +------------------------+
+| -id: int               |         | -id: int               |        | -id: int               |
+| -nom: string           |         | -balance: float        |        | -montant: float        |
+| -prenom: string        |         | -devise: string        |        | -type: string          |
+| -date_naissance: date  |         | -transactions: array  |        +------------------------+
+| -nationalite: string   |         +------------------------+        | +getId(): int          |
+| -genre: string         |         | +getId(): int          |        | +getMontant(): float   |
+| +getId(): int          |         | +getBalance(): float   |        | +getType(): string     |
+| +getNom(): string      |         | +getDevise(): string   |        | +associerCompte(Compte)|
+| +getPrenom(): string   |         | +getTransactions():    |        +------------------------+
+| +getDateNaissance():   |           array                  |
+|   date                 |         | +ajouterTransaction(   |
+| +getNationalite():     |           Transaction)          |
+|   string               |         +------------------------+
+| +getGenre(): string    |
+| +afficherInformations():|
++------------------------+
+             |
+             |          +------------------------+
+             +--------->|        Compte          |
+                        +------------------------+
+                        | -id: int               |
+                        | -balance: float        |
+                        | -devise: string        |
+                        | -transactions: array  |
+                        | +getId(): int          |
+                        | +getBalance(): float   |
+                        | +getDevise(): string   |
+                        | +getTransactions():    |
+                        |   array                |
+                        | +ajouterTransaction(   |
+                        |   Transaction)          |
+                        +------------------------+
+
+
+*************************************************************************************
+
+
+Un diagramme de cas :
+
+
+
++-------------------------+
+| Utilisateur             |
++-------------------------+
+        |
+        | Utilise
+        v
++-------------------------+            +-------------------------+            +------------------------+
+| Application de Gestion  |            | Contrôleur PHP          |            | Base de données        |
+| Bancaire en PHP         |            |                         |            |                        |
++-------------------------+            +-------------------------+            +------------------------+
+        |                                           |                               |
+        | Effectue                                |                               |
+        +---------------------------------------->|                               |
+        |        Afficher Informations            |                               |
+        |<---------------------------------------|                               |
+        |                                        |                               |
+        | Effectue                               |                               |
+        +--------------------------------------->|                               |
+        |        Ajouter Client                  |                               |
+        |<---------------------------------------|                               |
+        |                                        |   Recevoir demande         |
+        |                                        |------------------------------>|
+        |                                        |   Traiter demande          |
+        |                                        |------------------------------>|
+        |                                        |   Afficher résultats       |
+        |                                        |<------------------------------|
+        |                                        |                               |
+        | Effectue                               |                               |
+        +--------------------------------------->|                               |
+        |        Ajouter Compte                  |                               |
+        |<---------------------------------------|                               |
+        |                                        |   Recevoir demande         |
+        |                                        |------------------------------>|
+        |                                        |   Traiter demande          |
+        |                                        |------------------------------>|
+        |                                        |   Afficher résultats       |
+        |                                        |<------------------------------|
+        |                                        |                               |
+        | Effectue                               |                               |
+        +--------------------------------------->|                               |
+        |        Ajouter Transaction             |                               |
+        |<---------------------------------------|                               |
+        |                                        |   Recevoir demande         |
+        |                                        |------------------------------>|
+        |                                        |   Traiter demande          |
+        |                                        |------------------------------>|
+        |                                        |   Afficher résultats       |
+        |                                        |<------------------------------|
+
+
+
+
+
+*************************************************************************************
+
+
+Un diagramme de séquence :
+
++---------------------+          +-------------------------+         +------------------------+
+|   Utilisateur      |          |   Contrôleur PHP         |         |   Base de données      |
++---------------------+          +-------------------------+         +------------------------+
+         |                              |                                  |
+         |      Demande d'ajout         |                                  |
+         |--------------------------->|                                  |
+         |                              |                                  |
+         |                              |    Reçoit la demande d'ajout  |
+         |                              |-------------------------------->|
+         |                              |                                  |
+         |                              |    Génère un identifiant unique|
+         |                              |--------------------------------->|
+         |                              |                                  |
+         |                              |    Crée un objet Client avec  |
+         |                              |    les données fournies      |
+         |                              |--------------------------------->|
+         |                              |                                  |
+         |                              |    Valide les données du      |
+         |                              |    client (format, etc.)      |
+         |                              |--------------------------------->|
+         |                              |                                  |
+         |                              |    Insère le client dans la   |
+         |                              |    base de données            |
+         |                              |--------------------------------->|
+         |                              |                                  |
+         |                              |    Retourne une confirmation  |
+         |                              |    d'ajout au contrôleur      |
+         |                              |<--------------------------------|
+         |                              |                                  |
+         |    Affiche la confirmation   |                                  |
+         |<---------------------------|                                  |
+         |                              |                                  |

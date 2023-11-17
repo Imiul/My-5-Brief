@@ -2,6 +2,7 @@
 include("../Database/db_connection.php");
 
 $transactions = PrintTransaction();
+$clientsName = fetchClientData();
 
 ?>
 
@@ -100,8 +101,15 @@ $transactions = PrintTransaction();
             
             <div>
                 <select name="Client">
-                    <option value="1">Amine El karroudi</option>
-                    <option value="2">Women</option>
+                    <option value="0" selected>Choose Your Client</option>
+                    <?php
+                    if (!empty($clientsName)) {
+                        foreach ($clientsName as $client) {
+                            echo '<option value="1">' . $client["first_name"] . ' ' . $client["last_name"] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
                 </select>
                 <div class="errorMessage"></div>
             </div>

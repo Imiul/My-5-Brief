@@ -4,13 +4,16 @@ include("../Database/db_connection.php");
 
 $clientsName = fetchClientData();
 
-// if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
-//     $clientId = $_GET['id'];
+    $clientId = $_GET['id'];
 
-//     $deleteClientQuery = "DELETE FROM clients WHERE id = $clientId";
-//     $result = $conx->query($deleteClientQuery);
-// }
+    $deleteClientQuery = "DELETE FROM clients WHERE id = $clientId";
+    $result = $conx->query($deleteClientQuery);
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
 
 if(isset($_POST['submit'])){
     $first_name = $_POST['FirstName'];
