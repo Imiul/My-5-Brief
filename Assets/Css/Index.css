@@ -1,0 +1,82 @@
+main {margin-top: 100px;}
+.hero {margin-bottom: 20px; display: flex; justify-content: space-between;} 
+.hero div {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.table {
+    background-color: #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    align-items: center;
+    
+}
+.table h4:first-child {width: 8%;}
+.table h4:nth-child(2) {width: 20%;}
+.table h4:nth-child(3) {width: 15%;}
+.table h4:nth-child(4) {width: 15%;}
+.table h4:nth-child(5) {width: 15%;}
+.table h4:nth-child(6),
+.table div {width: 20%; }
+
+.client-list-head,
+.account-list-head {
+    margin-bottom: 20px;
+    background-color: #000;
+    color: #fff;
+}
+.client-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+
+
+
+
+.remove {
+    border-color:red ;
+    color: red;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: transparent;
+}
+.remove:hover {background-color: red;color: #fff;}
+
+
+
+
+.add {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: #ddd;
+    padding: 50px 100px;
+}
+.show-section {
+    right: 0;
+    transition: 1s;
+}
+
+.add form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+.add form input,
+.add form select {width: 100%;}
+
+.errorMessage {
+    background-color: red;
+    padding: 0 20px;
+    margin-top: 5px;
+    color: #fff;
+}
+

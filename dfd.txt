@@ -1,0 +1,80 @@
+<?php
+                if (!empty($clientsData)) {
+                    foreach ($clientsData as $client) {
+                        echo '<div class="client table">';
+                        echo '<h4>' . $client['id'] . '</h4>';
+                        echo '<h4>' . $client['first_name'] . ' ' . $client['last_name'] . '</h4>';
+                        echo '<h4>' . $client['birth_date'] . '</h4>';
+                        echo '<h4>' . $client['nationality'] . '</h4>';
+                        echo '<h4>' . $client['gender'] . '</h4>';
+                        echo '<div>';
+                        echo '<button class="sp-btn"><i class="fa-solid fa-pen-to-square"></i></button>';
+                        echo '<button class="sp-btn remove" style="margin-left: 10px;"><i class="fa-solid fa-trash"></i></button>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                }
+                ?>
+
+
+
+                // Fetch clients from the database
+// $fetchClientsQuery = "SELECT * FROM clients";
+// $clientsResult = $conx->query($fetchClientsQuery);
+
+// // Check if the query was successful
+// if ($clientsResult) {
+//     $clientsData = $clientsResult->fetch_all(MYSQLI_ASSOC);
+// } else {
+//     // Handle the error (e.g., display an error message)
+//     echo "Error fetching client data: " . $conx->error;
+// }
+
+
+
+
+
+
+
+<!-- HOW CLIENTS DIV WILL BE DISPLAYED  -->
+                <div class="client table">
+                    <h4>01</h4>
+                    <h4>Amine El karroudi</h4>
+                    <h4>12/02/2000</h4>
+                    <h4>Moroccan</h4>
+                    <h4>Men</h4>
+                    <div>
+                        <button class="sp-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="sp-btn remove"><i class="fa-solid fa-trash"></i></button>
+                        <button class="sp-btn remove" style="margin-top: 10px;">Account</button>
+                    </div>
+                </div> 
+
+
+            <!-- HOW CLIENTS DIV WILL BE DISPLAYED  -->
+                <!-- <div class="client table">
+                    <h4>01</h4>
+                    <h4>1</h4>
+                    <h4>Morocan Dirham</h4>
+                    <h4>15000</h4>
+                    <div>
+                        <button class="sp-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="sp-btn remove"><i class="fa-solid fa-trash"></i></button>
+                        <button class="sp-btn remove">Transaction</button>
+                    </div>
+                </div> -->
+
+
+
+
+                <!-- HOW CLIENTS DIV WILL BE DISPLAYED  -->
+                <div class="client table">
+                    <h4>01</h4>
+                    <h4>Amine El karroudi</h4>
+                    <h4>Credit</h4>
+                    <h4>150</h4>
+                    <div>
+                        <button class="sp-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="sp-btn remove"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
